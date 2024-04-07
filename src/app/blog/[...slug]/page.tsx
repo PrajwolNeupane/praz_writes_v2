@@ -59,7 +59,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex flex-col items-start lg:px-44 md:px-24 px-10 gap-8 py-5 min-h-[89.3vh] bg-primary-main w-full">
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 w-full">
         <div className="bg-gray-400 rounded-lg px-3 py-1 text-primary-main text-2xs font-sb inline-block">
           Web Frontend
         </div>
