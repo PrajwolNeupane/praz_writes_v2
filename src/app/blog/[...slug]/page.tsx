@@ -2,8 +2,6 @@ import { getBlogs, getBlog } from "@/actions";
 import { BlogCard, CustomCodeSnippets } from "@/components";
 import { BlogPost } from "@/types/Response.type";
 import Image from "next/image";
-import Link from "next/link";
-import { tw } from "twind";
 import "tailwindcss/tailwind.css";
 
 function extractTextFromCodeTag(text: string): string {
@@ -63,10 +61,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
               key={indx}
               dangerouslySetInnerHTML={{
                 __html: curr,
-              }}
+              }}     
             ></div>
           );
-        } else {
+        } else {                                                                                                    
           return (
             <CustomCodeSnippets
               key={indx}
