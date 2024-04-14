@@ -4,6 +4,8 @@ import dbConfig from "@/config/dbConfig";
 
 dbConfig();
 
+
+//Geting Single Blog Data
 export async function GET(req: NextRequest) {
   try {
     const page = Number(req.nextUrl.searchParams.get("page")) || 1;
@@ -25,3 +27,4 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
