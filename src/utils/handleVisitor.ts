@@ -38,7 +38,7 @@ export default async function handleVisitor(
   const deviceOS = extractOS(userAgent);
   const deviceType = extractDeviceName(userAgent);
 
-  const res = await fetch("http://localhost:3000/api/vistor/create", {
+  const res = await fetch(`${process.env.API_HOST}/api/vistor/create`, {
     method: "POST",
     body: JSON.stringify({ device: `${deviceType}-${deviceOS}`, token }),
     cache: "no-cache",
