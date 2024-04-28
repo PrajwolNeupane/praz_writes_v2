@@ -56,24 +56,7 @@ export default function Page() {
     },
   ];
 
-  const blogs = [
-    {
-      image:
-        "https://miro.medium.com/v2/resize:fit:720/format:webp/1*ZewMtCc-bWBIZZm4j_nVEA.png",
-      title:
-        "React Version 19: A Comprehensive Overview of the Upcoming Release.",
-    },
-    {
-      image:
-        "https://miro.medium.com/v2/resize:fit:720/format:webp/1*jWijugelR6pWM-nJzS60nA.png",
-      title: "Tailwind CSS Best Classes: Unlocking the Power of Tailwind.",
-    },
-    {
-      image:
-        "https://web.dev/static/articles/virtualize-long-lists-react-window/image/difference-scrolling-bet-517c003019905_856.jpg",
-      title: "Harnessing the Power of Visualize List in React.",
-    },
-  ];
+  const blogs: any[] = [];
 
   return (
     <div className="min-h-screen gap-10 flex flex-col bg-primary-main items-center py-5 lg:px-40 rg:px-16 px-5">
