@@ -38,15 +38,21 @@ export default async function handleVisitor(
   const deviceOS = extractOS(userAgent);
   const deviceType = extractDeviceName(userAgent);
 
-  const res = await fetch(`${process.env.API_HOST}/api/vistor/create`, {
-    method: "POST",
-    body: JSON.stringify({ device: `${deviceType}-${deviceOS}`, token }),
-    cache: "no-cache",
-  });
-
-  const data = await res.json();
   const response = NextResponse.next();
-  response.cookies.set("vistor_id", data.token);
+
+  try {
+    const res = await fetch(`${process.env.API_HOST}/api/vistor/create`, {
+      method: "POST",
+      body: JSON.stringify({ device: `${deviceType}-${deviceOS}`, token }),
+      cache: "no-cache",
+    });
+    const data = await res.json();
+
+    response.cookies.set("vistor_id", data.token);
+  } catch (e) {
+    console.log("Error on handleVisitor 😥");
+    console.log(e);
+  }
 
   return response;
 }
