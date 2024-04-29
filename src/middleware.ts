@@ -7,7 +7,7 @@ export default async function middleware(req: NextRequest) {
   const url = req.nextUrl.pathname;
 
   // Check if the URL is an API route or other routes to exclude
-  const excludedRoutes = ["/api/", "/favicon.ico", "/_next/", "/blog/"];
+  const excludedRoutes = ["/api/", "/favicon.ico", "/_next/", "/blog/","/stack"];
   if (excludedRoutes.some((route) => url.startsWith(route))) {
     // If it is, return the response without running the middleware
     return NextResponse.next();
