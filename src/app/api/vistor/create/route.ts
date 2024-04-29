@@ -6,16 +6,6 @@ import parseToken from "@/utils/parseToken";
 
 dbConfig();
 
-function generateRandomNumberWithDate(): string {
-  const currentDate = new Date();
-  const randomNumber = Math.floor(Math.random() * 900) + 100; // Generate a random 3-digit number (between 100 and 999)
-  const formattedDate = `${currentDate.getFullYear()}-${String(
-    currentDate.getMonth() + 1
-  ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
-  const result = `${formattedDate}-${randomNumber}`;
-  return result;
-}
-
 export async function POST(req: NextRequest) {
   try {
     const reqBody = await req.json();
@@ -25,7 +15,10 @@ export async function POST(req: NextRequest) {
         const visitorId = parseToken(token);
         if (visitorId) {
           // If the visitorId cookie exists, update the visit_count
-          const visitor = await Vistor.findById(visitorId);
+          const visitor = await Vistor.findOne({
+            _id: visitorId,
+            device: device,
+          });
           if (visitor) {
             visitor.visit_count = (
               parseInt(visitor.visit_count, 10) + 1
@@ -44,7 +37,6 @@ export async function POST(req: NextRequest) {
           } else {
             const newVisitor = new Vistor({
               device: device,
-              visit_id: generateRandomNumberWithDate(),
               visit_count: "1",
             });
             const savedVisitor = await newVisitor.save();
@@ -67,7 +59,6 @@ export async function POST(req: NextRequest) {
         } else {
           const newVisitor = new Vistor({
             device: device,
-            visit_id: generateRandomNumberWithDate(),
             visit_count: "1",
           });
           const savedVisitor = await newVisitor.save();
@@ -90,7 +81,6 @@ export async function POST(req: NextRequest) {
       } else {
         const newVisitor = new Vistor({
           device: device,
-          visit_id: generateRandomNumberWithDate(),
           visit_count: "1",
         });
         const savedVisitor = await newVisitor.save();

@@ -15,8 +15,8 @@ function countLetters(stringsArray: string[]) {
     totalLetters += cleanedString.length;
   }
 
-  // Calculate the result of totalLetters divided by 5 without decimals
-  const result = Math.floor(totalLetters / 5);
+  // Calculate the result of totalLetters divided by 300 without decimals
+  const result = Math.floor(totalLetters / 300);
 
   return result;
 }

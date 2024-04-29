@@ -1,6 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import dbConfig from "@/config/dbConfig";
 import Vistor from "@/modals/vistorModal";
+import Blog from "@/modals/blogModal";
+
 dbConfig();
 
 export async function GET(req: NextRequest) {
@@ -95,7 +97,6 @@ export async function GET(req: NextRequest) {
   const total_unique_visitors_time = await Vistor.countDocuments({
     createdAt: { $gte: startDate, $lte: endDate },
   });
-  const total_unique_visitors = await Vistor.countDocuments();
 
   // Generate the timeline array with visitor counts
   const timelineData = await Vistor.aggregate([
@@ -136,9 +137,27 @@ export async function GET(req: NextRequest) {
     }
   });
 
+  //Data for Cards
+  const total_unique_visitors = await Vistor.countDocuments();
+  var total_visitors: number = 0;
+  (await Vistor.find()).map((curr) => {
+    total_visitors += parseInt(curr.visit_count, 10);
+  });
+  var average_read: number = 0;
+  const blogs = await Blog.find();
+  blogs?.map((curr) => {
+    average_read += curr.read;
+  });
+
   return NextResponse.json({
     message: "Hello",
     data: {
+      card: {
+        blog_count: blogs.length,
+        total_unique_visitors,
+        total_visitors,
+        average_read: average_read / blogs.length + " minutes",
+      },
       unique_visitors: {
         total_unique_visitors,
         total_unique_visitors_time,
