@@ -15,7 +15,7 @@ export default async function middleware(req: NextRequest) {
 
   const sessionCookie = cookies().get("session")?.value;
   const visitorIdCookie = cookies().get("vistor_id")?.value;
-
+  console.log(req.nextUrl);
   if (!sessionCookie) {
     //Creating Vistor if not exist (Unique Vistor)
     const response = await handleVisitor(req);
